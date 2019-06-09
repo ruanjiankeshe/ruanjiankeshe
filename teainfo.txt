@@ -1,0 +1,98 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("Á¬½ÓÊ§°Ü: " . $conn->connect_error);}
+
+
+
+ $TeaName= $_GET['TeaName'];
+
+ $TeaSex= $_GET['TeaSex'];
+
+ $TeaAge= $_GET['TeaAge'];
+
+ $TeaTime= $_GET['TeaTime'];
+
+ $TeaIdCard= $_GET['TeaIdCard'];
+
+ $TeaTelephone= $_GET['TeaTelephone'];
+
+ $TeaIntro= $_GET['TeaIntro'];
+
+ $LTeaForAge= $_GET['LTeaForAge'];
+
+ $HTeaForAge= $_GET['HTeaForAge'];
+
+ $UId= $_GET['UId'];
+
+ $TeaUrl= $_GET['TeaUrl'];
+
+
+
+
+
+$action= $_GET['action'];
+
+  if($action=='insert')
+
+ {  $sql =  "insert into TeaInfo(TeaName,TeaSex,TeaAge,TeaTime,TeaIdCard,TeaTelephone,TeaIntro,LTeaForAge,HTeaForAge,UId,TeaUrl) values ('$TeaName',
+'$TeaSex', $TeaAge,$TeaTime,'$TeaIdCard','$TeaTelephone','$TeaIntro',$LTeaForAge,$HTeaForAge,$UId,'$TeaUrl');"; }
+
+
+
+  if($action=='chaxun')
+
+{  $sql =  "select * from TeaInfo where UId= $UId;"; }
+
+
+
+
+
+echo $sql;
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+?>
+
+
+ wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/teainfo.php',
+      data: {
+        action: 'insert',
+        TeaName: 'hanjz',
+      
+        TeaSex: 'hanjz',
+        TeaAge: 1,
+        TeaTime: 1,
+        TeaIdCard: 'hanjz',
+        TeaTelephone : 'hanjz',
+        TeaIntro : 'hanjz',
+        LTeaForAge: 1,
+        HTeaForAge: 1,
+        UId: 1,
+        TeaUrl:'hanjz'
+        
+      },
+      method: 'GET', 
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/teainfo.php',
+      data: {
+        action: 'chaxun',
+        UId: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+

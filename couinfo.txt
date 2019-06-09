@@ -1,0 +1,114 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("连接失败: " . $conn->connect_error);}
+
+
+
+ $CouPlace= $_GET['CouPlace'];
+
+ $TeaId= $_GET['TeaId'];
+
+ $EduId= $_GET['EduId'];
+
+ $CouFeeHY= $_GET['CouFeeHY'];
+
+ $CouFeeOY= $_GET['CouFeeOY'];
+
+ $CouFeeTY= $_GET['CouFeeTY'];
+
+ $CouDay= $_GET['CouDay'];
+
+ $CouTime= $_GET['CouTime'];
+
+ $CouContext= $_GET['CouContext'];
+
+ $TeaField= $_GET['TeaField'];
+
+ $CouStar= $_GET['CouStar'];
+
+$action= $_GET['action'];
+
+
+
+  if($action=='insert')
+
+{
+
+if(empty($TeaId))
+
+ {  $sql =  "insert into CouInfo (CouPlace,EduId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',
+'$EduId', '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField','$CouStar');"; }
+
+if(empty($EduId))
+
+  {  $sql =  "insert into CouInfo (CouPlace,TeaId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',$TeaId,
+ '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField','$CouStar');"; }
+
+}
+
+  if($action=='chaxun')
+
+{
+
+if(empty($TeaId))
+
+{  $sql =  "select * from CouInfo where EduId= '$EduId' ;"; }
+
+if(empty($EduId))
+
+  {  $sql =  "select * from CouInfo where TeaId= $TeaId ;"; }
+
+}
+
+
+
+echo $sql;
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+?>
+
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/couinfo.php',
+      data: {
+        action: 'insert',
+        CouPlace: 'hanjz',
+      
+        EduId: 'hanjz',
+        CouFeeHY: 'hanjz',
+        CouFeeOY: 'hanjz',
+        CouFeeTY: 'hanjz',
+        CouDay : 'hanjz',
+        CouTime : 'hanjz',
+        CouContext: 'hanjz',
+        TeaField: 'hanjz',
+        CouStar: 'hanjz',
+      },
+      method: 'GET', 
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/couinfo.php',
+      data: {
+        action: 'chaxun',
+        EduId: 'hanjz',
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+
+
+
+备注：两个函数都是填写 EduId或者TeaId一项，不可以填两项，   
+例如：TeaId:1

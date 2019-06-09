@@ -1,0 +1,72 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("Á¬½ÓÊ§°Ü: " . $conn->connect_error);}
+
+ $PName= $_GET['PName'];
+
+ $StuBYear= $_GET['StuBYear'];
+
+ $StuBMonth= $_GET['StuBMonth'];
+
+ $StuSex= $_GET['StuSex'];
+
+ $StuName= $_GET['StuName'];
+
+ $PTelephone= $_GET['PTelephone'];
+
+ $UId= $_GET['UId'];
+
+ $action= $_GET['action'];
+
+ if($action=='insert')
+
+ {  $sql =  "insert into ParentInfo (PName,StuBYear,StuBMonth,StuSex,StuName,PTelephone,UId) values ('$PName',$StuBYear,
+$StuBMonth,  '$StuSex','$StuName','$PTelephone', $UId);"; }
+
+  if($action=='chaxun')
+
+  {  $sql =  "select * from ParentInfo where UId= $UId ;"; }
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+?>
+
+
+
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/parentinfo.php',
+      data: {
+        action: 'insert',
+        PName: 'hanjz',
+        StuBYear: 2018,
+        StuBMonth:1,
+        StuSex:"male",
+        StuName:'sfsdf',
+        PTelephone:'sfdsf',
+        UId:5
+      },
+      method: 'GET', 
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/parentinfo.php',
+      data: {
+        action: 'chaxun',
+        UId: 5,
+
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+  },

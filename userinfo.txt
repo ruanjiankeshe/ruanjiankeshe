@@ -1,0 +1,64 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("Á¬½ÓÊ§°Ü: " . $conn->connect_error);}
+
+$Uname = $_GET['Uname '];
+
+ $UPwd= $_GET['UPwd'];
+
+ $UPhone= $_GET['UPhone'];
+
+ $UEmail= $_GET['UEmail'];
+
+  $UState= $_GET['UState'];
+
+   $action= $_GET['action'];
+
+if($action=='insert')
+
+{  $sql =  "insert into UserInfo (UName,UPwd,UPhone,UEmail,UState) values ('$Uname,'$UPwd','$UPhone','$UEmail', $UState');"; }
+
+ if($action=='insert')
+
+{  $sql =  "select * from UserInfo where Uname='$Uname' ;"; }
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+?>
+
+
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/userinfo.php',
+      data: {
+        action: 'insert',
+        Uname: 'hanjz',
+        UPwd: 'hanjz',
+        UPhone:'13786xxxxx',
+        UEmail:"12312@qq.com",
+        UState:1,
+      },
+      method: 'GET', 
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/userinfo.php',
+      data: {
+        action: 'chaxun',
+        Uname: 'hanjz',
+
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+  },

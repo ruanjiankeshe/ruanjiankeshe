@@ -1,0 +1,73 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("Á¬½ÓÊ§°Ü: " . $conn->connect_error);}
+
+ $EduId= $_GET['EduId'];
+
+ $EduIntro= $_GET['EduIntro'];
+
+ $LEduForAge= $_GET['LEduForAge'];
+
+ $HEduForAge= $_GET['HEduForAge'];
+
+ $UId= $_GET['UId'];
+
+ $TeaField= $_GET['TeaField'];
+
+ $EduName= $_GET['EduName'];
+
+$action= $_GET['action'];
+
+ if($action=='insert')
+
+ {  $sql =  "insert into EduInfo (EduId,EduIntro,LEduForAge,HEduForAge,UId,TeaField,EduName) values ('$EduId','$EduIntro',
+$LEduForAge,  $HEduForAge,$UId,'$TeaField', '$EduName');"; }
+
+  if($action=='chaxun')
+
+  {  $sql =  "select * from EduInfo where UId= $UId ;"; }
+
+echo $sql;
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+?>
+
+
+
+
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/eduinfo.php',
+      data: {
+        action: 'insert',
+        EduId: 'hanjz',
+        EduIntro: 'hanjz',
+        LEduForAge: 1,
+        HEduForAge: 1,
+        UId: 1,
+        TeaField: 'hanjz',
+        EduName: 'hanjz',
+      },
+      method: 'GET', 
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/eduinfo.php',
+      data: {
+        action: 'chaxun',
+        UId: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
