@@ -1,0 +1,27 @@
+{
+  "pages": [
+
+    "pages/index/index",
+    
+    "pages/register/register_organization/register_organization",
+    "pages/login/login_organization/login_organization", 
+    "pages/login/login_parent/login_parent",
+    "pages/login/login_teacher/login_teacher",
+    "pages/register/register_teacher/register_teacher",
+    "pages/register/register_parent/register_parent",
+    
+    "pages/logs/logs",
+    "pages/admin/admin",
+    "pages/parents/parents",
+    "pages/teacher/teacher"
+  ],
+
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+
+  "sitemapLocation": "sitemap.json"
+}
