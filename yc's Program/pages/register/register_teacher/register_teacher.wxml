@@ -17,7 +17,7 @@
 
       <view class="account">
     <view class="title">绑定手机号</view>
-    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
@@ -46,45 +46,45 @@
   
     <view class="account">
     <view class="title">教师年龄</view>
-    <view class="num"><input bindinput="teaAgeInput" placeholder="教师年龄" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="teaAgeInput" placeholder="教师年龄" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
   
     <view class="account">
     <view class="title">从教年限</view>
-    <view class="num"><input bindinput="teaTimeInput" placeholder="从教年限" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="teaTimeInput" placeholder="从教年限" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
       <view class="account">
     <view class="title">联系方式</view>
-    <view class="num"><input bindinput="teaPhoneInput" placeholder="请输入联系方式" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="teaPhoneInput" placeholder="请输入联系方式" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
   
     <view class="account">
     <view class="title">身份证号</view>
-    <view class="num"><input bindinput="teaIdInput" placeholder="教师身份证号" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="teaIdInput" placeholder="教师身份证号" placeholder-style="color:#999999;" type='idcard'/></view>
   </view>
   <view class="hr"></view>
 
     <view class="account">
     <view class="title">最低适合年龄</view>
-    <view class="num"><input bindinput="minAgeInput" placeholder="教育最低适合年龄" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="minAgeInput" placeholder="教育最低适合年龄" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
   
     <view class="account">
     <view class="title">最高适合年龄</view>
-    <view class="num"><input bindinput="maxAgeInput" placeholder="教育最高适合年龄" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="maxAgeInput" placeholder="教育最高适合年龄" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
 
   <view class="hr"></view>
   <view class="title">教师个人简介</view>  
-  <textarea placeholder="简介" bindinput="teaInfoInput" auto-focus />
+  <textarea placeholder="简介" bindinput="teaInfoInput" adjust-position />
 
 
 

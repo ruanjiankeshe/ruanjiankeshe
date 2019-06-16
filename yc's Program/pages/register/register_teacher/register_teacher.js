@@ -6,6 +6,9 @@ Page({
    * data为全局变量
    */
   data: {
+    phoneif: "",
+    emailif: "",
+
     account: "",//账户
     password: "",//密码
     phone: "",
@@ -131,19 +134,37 @@ Page({
   phoneInput: function (e) {
     var p = e.detail.value;
     if (p != '') {
-      this.setData({ phone: p });
+      this.setData({
+        phone: p,
+        phoneif: p,
+      });
     }
   },
+
   //获得绑定邮箱
   emailInput: function (e) {
     var em = e.detail.value;
+    var reg = /^1[3456789]\d{9}$/;
+    if (!reg.test(this.data.phoneif)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    }
     if (em != '') {
-      this.setData({ email: em });
+      this.setData({ email: em, emailif: em });
     }
   },
   //获得教师名称
   teaNameInput: function (e) {
     var t_name = e.detail.value;
+    var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+    if (!reg.test(this.data.emailif)) {
+      wx.showToast({
+        title: '请输入正确的邮箱',
+        icon: 'none'
+      })
+    }
     if (t_name != '') {
       this.setData({ tea_name: t_name });
     }
