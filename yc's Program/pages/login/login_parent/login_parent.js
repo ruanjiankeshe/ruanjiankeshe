@@ -3,7 +3,7 @@ Page({
   data: {
     account: "",
     password: "",
-    message: "",
+
     tabBar2: {
       "color": "#9E9E9E",
       "selectedColor": "#228B22",
@@ -51,6 +51,8 @@ Page({
       this.setData({ password: pwd });//把获取到的密码赋值给全局变量Data中的password
     }
   },
+
+
   //处理login的触发事件
   login: function (e) {
 
@@ -60,8 +62,8 @@ Page({
       data: {
         //从全局变量data中获取数据
         action: 'chaxun',
-        account: this.data.account,
-        password: this.data.password,
+        Uname: this.data.account,
+        UPwd: this.data.password,
       },
       method: 'get',//定义传到后台接受的是post方法还是get方法
       header: {
@@ -69,15 +71,18 @@ Page({
       },
       success: function (res) {
         console.log("调用API成功");
-        console.log(res.data.message);
-        if (res.data.message == "ok") {
+
+        if (res.data.data.login_in == true) {
           wx.showToast({
             title: '登陆成功',
             icon: 'success',
             duration: 2000
+          }),
+          wx.reLaunch({
+            url: '/pages/parents/parents',
           })
         }
-        else {
+        else if (res.data.data.login_in == false) {
           wx.showToast({
             title: '用户名或者密码错误',
             icon: 'none',
