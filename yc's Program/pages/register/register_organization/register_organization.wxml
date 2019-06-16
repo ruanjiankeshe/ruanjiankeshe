@@ -19,13 +19,19 @@
 
       <view class="account">
     <view class="title">绑定手机号</view>
-    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
         <view class="account">
     <view class="title">绑定邮箱</view>
     <view class="num"><input bindinput="emailInput" placeholder="用户绑定邮箱" placeholder-style="color:#999999;"/></view>
+  </view>
+  <view class="hr"></view>
+
+  <view class="account">
+    <view class="title">机构名称</view>
+    <view class="num"><input bindinput="orgNameInput" placeholder="请输入教育机构名称" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
@@ -42,21 +48,21 @@
 
   <view class="account">
     <view class="title">标识码</view>
-    <view class="num"><input bindinput="orgIdInput" placeholder="请输入8位识别码：XX XX XXXX" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="orgIdInput" placeholder="请输入8位识别码：XX XX XXXX" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
   
     <view class="account">
     <view class="title">最低年龄</view>
-    <view class="num"><input bindinput="minAgeInput" placeholder="教育最低适合年龄" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="minAgeInput" placeholder="教育最低适合年龄" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
   
     <view class="account">
     <view class="title">最高年龄</view>
-    <view class="num"><input bindinput="maxAgeInput" placeholder="教育最高适合年龄" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="maxAgeInput" placeholder="教育最高适合年龄" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
@@ -74,7 +80,7 @@
  
       <view class="account">
     <view class="title">联系方式</view>
-    <view class="num"><input bindinput="branchPhoneInput" placeholder="请输入分店联系方式" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="branchPhoneInput" placeholder="请输入分店联系方式" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
     
@@ -86,7 +92,7 @@
 
   <view class="hr"></view>
   <view class="title">机构简介</view>  
-  <textarea placeholder="简介" bindinput="orgInfoInput" auto-focus />
+  <textarea placeholder="简介" bindinput="orgInfoInput" adjust-position />
 
 
   <button class="btn" bindtap='register' type="primary">提交</button>
