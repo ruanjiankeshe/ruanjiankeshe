@@ -28,7 +28,10 @@ Page({
       }
     ],
     stu_sex: 0,
-    // date:'2016-09-01',
+    
+    phoneif: "",
+    emailif: "",
+
     tabBar2: {
       "color": "#9E9E9E",
       "selectedColor": "#228B22",
@@ -130,19 +133,37 @@ Page({
   phoneInput: function (e) {
     var p = e.detail.value;
     if (p != '') {
-      this.setData({ phone: p });
+      this.setData({
+         phone: p,
+         phoneif: p, 
+       });
     }
   },
+  
   //获得绑定邮箱
   emailInput: function (e) {
     var em = e.detail.value;
+    var reg = /^1[3456789]\d{9}$/; 
+    if (!reg.test(this.data.phoneif)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    }
     if (em != '') {
-      this.setData({ email: em });
+      this.setData({ email: em, emailif: em });
     }
   },
   //获得家长姓名
   parentNameInput: function (e) {
     var p_name = e.detail.value;
+    var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+    if (!reg.test(this.data.emailif)) {
+      wx.showToast({
+        title: '请输入正确的邮箱',
+        icon: 'none'
+      })
+    }
     if (p_name != '') {
       this.setData({ parent_name: p_name });
     }
@@ -176,33 +197,20 @@ Page({
     })
   },
   //获得学生出生日期-选择日期触发事件
-  stuBornDateInput: function (e) {
-    var s_date = this.detail.value;
-    if (s_date != '') {
-      splitDate(s_date),
-      this.setData({ 
-        stu_bornDate: s_date,
-      })
-    }
-  },
+
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      stu_bornDate: e.detail.value,
-      
-    })
-  },
-  //分离年月
-  splitDate: function (stu_bornDate){
-    var strArray = stu_bornDate.split("-");
+    var strArray = e.detail.value.split("-");
     for (var i = 0; i < strArray.length; i++) {
       console.log(" " + strArray[i] + " ")
     }
     var s_year = strArray[0];
     var s_month = strArray[1];
     this.setData({
+      stu_bornDate: e.detail.value,
       stu_bornYear: s_year,
       stu_bornMonth: s_month
+      
     })
   },
   //处理register的触发事件

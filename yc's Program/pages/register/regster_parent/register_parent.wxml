@@ -19,7 +19,7 @@
 
       <view class="account">
     <view class="title">绑定手机号</view>
-    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="phoneInput" placeholder="用户绑定手机号" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
@@ -36,7 +36,7 @@
     
     <view class="account">
     <view class="title">联系方式</view>
-    <view class="num"><input bindinput="phoneNumInput" placeholder="请输入家长联系方式" placeholder-style="color:#999999;"/></view>
+    <view class="num"><input bindinput="phoneNumInput" placeholder="请输入家长联系方式" placeholder-style="color:#999999;" type='number'/></view>
   </view>
   <view class="hr"></view>
 
@@ -59,7 +59,7 @@
   
     <view class="account">
     <view class="title">学生出生年月</view>
-   <picker mode="date" bindchange="bindDateChange" value="{{stu_bornDate}}" start="1970-01-01" end="2017-09-01"  bindinput="stuBornDateInput">
+   <picker mode="date" bindchange="bindDateChange" value="{{stu_bornDate}}" start="1970-01-01" end="2017-09-01">
     <view class="picker">
     {{stu_bornDate}}
     </view>
