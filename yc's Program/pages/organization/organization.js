@@ -10,8 +10,10 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     menuitems: [
-      { text: '完善信息', url: '/pages/index/index' },
-      { text: '个性设置', url: '/pages/index/index' }
+      { text: '编辑公告', url: '' },
+      { text: '修改账户信息', url: '/pages/organization/Mod_UserInfo/Mod_UserInfo' },
+      { text: '修改机构信息', url: '/pages/organization/Mod_EduInfo/Mod_EduInfo' },
+      { text: '设置课表信息', url: '/pages/organization/Set_Curriculum/Set_Curriculum' },
     ],
     tabBar4: {
       "color": "#9E9E9E",
@@ -20,28 +22,28 @@ Page({
       "borderStyle": "#ccc",
       "list": [
         {
-          "pagePath": "/pages/login/login_organization/login_organization",
-          "text": "咨询",
+          "pagePath": "/pages/organization/Homepage_Organization/Homepage_Organization",
+          "text": "资讯",
           "iconPath": "/images/calendar.png",
           "selectedIconPath": "/images/calendar.png",
           "clas": "menu-item1",
           active: false
         },
         {
-          "pagePath": "/pages/register/register_organization/register_organization",
-          "text": "课程",
-          "iconPath": "/images/book.png",
-          "selectedIconPath": "/images/book.png",
+          "pagePath": "/pages/organization/Curriculum/Curriculum",
+          "text": "店面",
+          "iconPath": "/images/shop.png",
+          "selectedIconPath": "/images/shop.png",
           "clas": "menu-item1",
           active: false
         },
         {
-          "pagePath": "/pages/register/register_organization/register_organization",
+          "pagePath": "/pages/organization/organization",
           "text": "我",
           "iconPath": "/images/user.png",
           "selectedIconPath": "/images/user.png",
           "clas": "menu-item1",
-          active: false
+          active: true
         }
       ],
       "position": "bottom"
@@ -83,5 +85,11 @@ Page({
         hasUserInfo: true
       })
     }
+  },
+
+  backIndex: function(e){
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
   }
 })

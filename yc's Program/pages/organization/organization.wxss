@@ -69,13 +69,25 @@
 }
 .item-array {
   position: fixed;
+  width: 40rpx;
   right: 50rpx;
   font-size: 38rpx;
+  height: 40rpx;
 }
 
 .item-image {
   position: fixed;
   left: 50rpx;
   width: 40rpx;
+  font-size: 38rpx;
   height: 40rpx;
+}
+
+
+.btn4{
+  width: 95%;
+  margin-top:300rpx;
+  position: relative;
+  left: 0rpx;
+  top:  -100px;
 }
