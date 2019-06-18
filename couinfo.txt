@@ -13,7 +13,7 @@ $dbname = "ruanjian";
 
  $TeaId= $_GET['TeaId'];
 
- $EduId= $_GET['EduId'];
+ $ELId= $_GET['ELId'];
 
  $CouFeeHY= $_GET['CouFeeHY'];
 
@@ -41,27 +41,26 @@ $action= $_GET['action'];
 
 if(empty($TeaId))
 
- {  $sql =  "insert into CouInfo (CouPlace,EduId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',
-'$EduId', '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField','$CouStar');"; }
+ {  $sql =  "insert into CouInfo (CouPlace,ELId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',
+'$ELId', '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField',$CouStar);"; }
 
-if(empty($EduId))
+if(empty($ELId))
 
   {  $sql =  "insert into CouInfo (CouPlace,TeaId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',$TeaId,
- '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField','$CouStar');"; }
+ '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField',$CouStar);"; }
 
 }
+ if($action=='chaxun')
 
-  if($action=='chaxun')
+          {
 
-{
+                  if(empty($TeaId))
 
-if(empty($TeaId))
+                  {  $sql =  "select * from CouInfo where ELId= $ELId ;"; }
 
-{  $sql =  "select * from CouInfo where EduId= '$EduId' ;"; }
+                  if(empty($ELId))
 
-if(empty($EduId))
-
-  {  $sql =  "select * from CouInfo where TeaId= $TeaId ;"; }
+                            {  $sql =  "select * from CouInfo where TeaId= $TeaId ;"; }
 
 }
 
@@ -74,26 +73,25 @@ echo $sql;
  echo json_encode(['data'=>$res]);
                     $conn->close();
 ?>
-
-wx.request({
+  wx.request({
       url: 'https://www.hanjz.xyz/ruanjian/couinfo.php',
       data: {
         action: 'insert',
         CouPlace: 'hanjz',
-      
-        EduId: 'hanjz',
+
+        ELId: 1,
         CouFeeHY: 'hanjz',
         CouFeeOY: 'hanjz',
         CouFeeTY: 'hanjz',
-        CouDay : 'hanjz',
-        CouTime : 'hanjz',
+        CouDay: 'hanjz',
+        CouTime: 'hanjz',
         CouContext: 'hanjz',
         TeaField: 'hanjz',
-        CouStar: 'hanjz',
+        CouStar: 1.0,
       },
-      method: 'GET', 
+      method: 'GET',
       success: function (res) {
-        console.log(res.data);
+        console.log(res.data)
       }
     })
     wx.request({
@@ -107,7 +105,6 @@ wx.request({
         console.log(res.data);
       }
     })
-
 
 
 备注：两个函数都是填写 EduId或者TeaId一项，不可以填两项，   

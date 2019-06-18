@@ -31,6 +31,10 @@ $LEduForAge,  $HEduForAge,$UId,'$TeaField', '$EduName');"; }
   if($action=='chaxun')
 
   {  $sql =  "select * from EduInfo where UId= $UId ;"; }
+ if($action=='chaxunchongming')
+
+  {  $sql =  "select * from EduInfo where EduId= '$EduId' ;"; }
+
 
 echo $sql;
 
@@ -65,6 +69,17 @@ wx.request({
       data: {
         action: 'chaxun',
         UId: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/eduinfo.php',
+      data: {
+        action: 'chaxunchongming',
+        EduId: 'hanjz',
       },
       method: 'GET',
       success: function (res) {
