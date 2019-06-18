@@ -1,0 +1,30 @@
+<view class='header'>增加店面</view>
+
+  <view class="account">
+    <view class="title">分店名字</view>
+    <view class="num"><input bindinput="branchNameInput" placeholder="请输入分店名字" placeholder-style="color:#999999;"/></view>
+  </view>
+
+  <view class="hr"></view>
+    <view class="account">
+    <view class="title">店面地址</view>
+    <view class="num"><input bindinput="branchAddrInput" placeholder="请输入分店店面地址" placeholder-style="color:#999999;"/></view>
+  </view>
+  <view class="hr"></view>
+ 
+      <view class="account">
+    <view class="title">联系方式</view>
+    <view class="num"><input bindinput="branchPhoneInput" placeholder="请输入分店联系方式" placeholder-style="color:#999999;" type='number'/></view>
+  </view>
+  <view class="hr"></view>
+
+  
+
+  <button class="btn" bindtap='addELInfo' type="primary">提交</button>
+
+<view>{{message}}</view>
+
+<text> \n </text>
+<text> \n </text>
+<text> \n </text>
+<text> \n </text>

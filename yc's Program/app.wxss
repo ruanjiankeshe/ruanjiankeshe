@@ -1,0 +1,42 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+/*tabBar*/
+.tab-bar {
+  position: fixed;
+  z-index: 99999;
+  width: 100%;
+  height: 100rpx;
+  /*line-height: 100rpx;*/
+  font-size: 22rpx;
+  color: #9b9b9b;
+  background: #fff;
+  text-align: center;
+  display: -webkit-flex;
+  display:flex;
+}
+
+.tab-bar .menu-item {
+  display: block;
+  flex: 1;
+  /*width: 33.3%;*/
+  height: 100%;
+}
+
+.tab-bar .menu-item image {
+  margin: 10rpx auto 0 auto;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.tab-bar .menu-item.active {
+  color: #53df87;
+}
