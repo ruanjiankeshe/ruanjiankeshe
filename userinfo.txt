@@ -1,49 +1,53 @@
-
-
 <?php
 $servername = "localhost";
 $username = "hjz";
 $password = "123456";
 $dbname = "ruanjian";
-$conn = new mysqli($servername, $username, $password, $dbname);
- if ($conn->connect_error) {die("连接失败: " . $conn->connect_error);}
 
- $Uname = $_GET['Uname'];
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("����ʧ��: " . $conn->connect_error);}
 
-  $UPwd= $_GET['UPwd'];
+$Uname = $_GET['Uname '];
 
-  $UPhone= $_GET['UPhone'];
+ $UPwd= $_GET['UPwd'];
 
-   $UEmail= $_GET['UEmail'];
+ $UPhone= $_GET['UPhone'];
 
-    $UState= $_GET['UState'];
+ $UEmail= $_GET['UEmail'];
 
-     $action= $_GET['action'];
+  $UState= $_GET['UState'];
 
-  if($action=='insert')
+   $action= $_GET['action'];
 
-  {  $sql =  "insert into UserInfo (UName,UPwd,UPhone,UEmail,UState) values ('$Uname','$UPwd','$UPhone','$UEmail', $UState);";
-	   $result = $conn->query($sql);
-    while($row=mysqli_fetch_assoc($result)) $res[] = $row;
-     echo json_encode(['data'=>$res]);
-                        $conn->close();
- }
+ if($action=='insert')
 
-   if($action=='chaxun')
+              {  $sql =  "insert into UserInfo (UName,UPwd,UPhone,UEmail,UState) values ('$Uname','$U
+Pwd','$UPhone','$UEmail', $UState);";
+           $result = $conn->query($sql);
+        while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+         echo json_encode(['data'=>$res]);
+                            $conn->close();
+     }
 
-   {  $sql =  "select * from UserInfo where Uname='$Uname';"; 
-   $result = $conn->query($sql);
+     
+          if($action=='chaxun')
+                                    {  $sql =  "select UId,UName,UPhone,UEmail,UState from UserInfo w
+here Uname='$Uname';";
+                    $result = $conn->query($sql);
 
-    $row=mysqli_fetch_assoc($result);
-     $res = $row;
-if($res["UPwd"]==$UPwd)
-	$res["login_in"] = true;
-else
-	$res["login_in"] = false;
-     echo json_encode(['data'=>$res]);
-                        $conn->close();
-}
+                     $row=mysqli_fetch_assoc($result);
+          $res = $row;
+         $sql =  "select * from UserInfo where Uname='$Uname';";
+                              $result = $conn->query($sql);
 
+                               $row=mysqli_fetch_assoc($result);
+                 if($row["UPwd"]==$UPwd)
+                                         $res["login_in"] = true;
+                        else
+                                                $res["login_in"] = false;
+            echo json_encode(['data'=>$res]);
+                               $conn->close();
+                  }
 ?>
 
 wx.request({
@@ -65,15 +69,11 @@ wx.request({
       url: 'https://www.hanjz.xyz/ruanjian/userinfo.php',
       data: {
         action: 'chaxun',
-        Uname: 'hanjz3',
-        UPwd: 'hanjz3',
+        Uname: 'hanjz',
+        UPwd:'hanjz'
       },
       method: 'GET',
       success: function (res) {
         console.log(res.data);
       }
     })
-  },
-  
-  
- chaxun操作，用户名和密码匹配上res.data.login_in 为true，否则为false
