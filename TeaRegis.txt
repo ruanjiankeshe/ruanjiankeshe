@@ -28,7 +28,7 @@ $dbname = "ruanjian";
  $HTeaForAge= $_GET['HTeaForAge'];
 
  $UId= $_GET['UId'];
-
+ $TeaRegisId=$_GET['TeaRegisId'];
 
 
 
@@ -45,18 +45,24 @@ $action= $_GET['action'];
   if($action=='chaxun')
 
 {  $sql =  "select * from TeaRegis where UId= $UId;"; }
+if($action=='chaxunall')
+
+{  $sql =  "select * from TeaRegis;"; }
+if($action=='delete')
+
+{  $sql =  "delete from TeaRegis  where TeaRegisId= $TeaRegisId;"; }
 
 
 
 
-
-echo $sql;
 
  $result = $conn->query($sql);
  while($row=mysqli_fetch_assoc($result)) $res[] = $row;
  echo json_encode(['data'=>$res]);
                     $conn->close();
 ?>
+
+
 
  wx.request({
       url: 'https://www.hanjz.xyz/ruanjian/TeaRegis.php',
@@ -91,4 +97,26 @@ echo $sql;
         console.log(res.data);
       }
     })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/TeaRegis.php',
+      data: {
+        action: 'chaxunall',
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/TeaRegis.php',
+      data: {
+        action: 'delete',
+        TeaRegisId: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
 
+400 30

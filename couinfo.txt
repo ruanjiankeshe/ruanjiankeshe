@@ -49,6 +49,12 @@ if(empty($ELId))
   {  $sql =  "insert into CouInfo (CouPlace,TeaId,CouFeeHY,CouFeeOY,CouFeeTY,CouDay,CouTime,CouContext,TeaField,CouStar) values ('$CouPlace',$TeaId,
  '$CouFeeHY','$CouFeeOY','$CouFeeTY','$CouDay','$CouTime','$CouContext','$TeaField',$CouStar);"; }
 
+
+
+ $result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
 }
  if($action=='chaxun')
 
@@ -62,16 +68,46 @@ if(empty($ELId))
 
                             {  $sql =  "select * from CouInfo where TeaId= $TeaId ;"; }
 
-}
-
-
-
-echo $sql;
 
  $result = $conn->query($sql);
  while($row=mysqli_fetch_assoc($result)) $res[] = $row;
  echo json_encode(['data'=>$res]);
                     $conn->close();
+}
+ if($action=='chaxunall')
+{
+$sql =  "select * from CouInfo;";
+$result = $conn->query($sql);
+ while($row=mysqli_fetch_assoc($result)) 
+{
+ if(empty($row["TeaId"]))
+{
+$sql =  "select * from EduLocation where ELId= $row[ELId];";
+$result1 = $conn->query($sql);;
+$row1=mysqli_fetch_assoc($result1);
+$row["owner"]=$row1["ELName"];
+$sql =  "select * from EduInfo where EduId= $row1[EduId];";
+$result2 = $conn->query($sql);;
+$row2=mysqli_fetch_assoc($result2);
+$row["LTeaForAge"]=$row2["LEduForAge"];
+$row["HTeaForAge"]=$row2["HEduForAge"];
+}
+ if(empty($row["ELId"]))
+{
+$sql =  "select * from TeaInfo where  TeaId= $row[TeaId];";
+$result1 = $conn->query($sql);;
+$row1=mysqli_fetch_assoc($result1);
+$row["owner"]=$row1["TeaName"];
+$row["LTeaForAge"]=$row1["LTeaForAge"];
+$row["HTeaForAge"]=$row1["HTeaForAge"];
+}
+$res[] = $row;
+}
+ echo json_encode(['data'=>$res]);
+                    $conn->close();
+}
+
+
 ?>
   wx.request({
       url: 'https://www.hanjz.xyz/ruanjian/couinfo.php',
@@ -99,6 +135,16 @@ echo $sql;
       data: {
         action: 'chaxun',
         EduId: 'hanjz',
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/couinfo.php',
+      data: {
+        action: 'chaxunall',
       },
       method: 'GET',
       success: function (res) {

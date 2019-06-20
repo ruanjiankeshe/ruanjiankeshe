@@ -30,6 +30,8 @@ $dbname = "ruanjian";
  $EduAddress= $_GET['EduAddress'];
 
  $EduTelephone= $_GET['EduTelephone'];
+ $EduRegisId= $_GET['EduRegisId'];
+
 
 
 
@@ -45,8 +47,14 @@ $LEduForAge,  $HEduForAge,$UId,'$TeaField', '$EduName',    '$ELName','$EduAddres
 
   {  $sql =  "select * from EduRegis where UId= $UId ;"; }
 
+if($action=='chaxunall')
 
-echo $sql;
+{  $sql =  "select * from EduRegis;"; }
+if($action=='delete')
+
+{  $sql =  "delete from EduRegis where EduRegisId= $EduRegisId;"; }
+
+
 
  $result = $conn->query($sql);
  while($row=mysqli_fetch_assoc($result)) $res[] = $row;
@@ -84,6 +92,27 @@ wx.request({
       data: {
         action: 'chaxun',
         UId: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/eduregis.php',
+      data: {
+        action: 'chaxunall',
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+      }
+    })
+wx.request({
+      url: 'https://www.hanjz.xyz/ruanjian/eduregis.php',
+      data: {
+        action: 'delete',
+        EduRegisId: 1,
       },
       method: 'GET',
       success: function (res) {

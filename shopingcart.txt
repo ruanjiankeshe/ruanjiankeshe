@@ -1,0 +1,96 @@
+<?php
+$servername = "localhost";
+$username = "hjz";
+$password = "123456";
+$dbname = "ruanjian";
+
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {die("Á¬½ÓÊ§°Ü: " . $conn->connect_error);}
+
+  $CouId= $_GET['CouId'];
+
+  $PId= $_GET['PId'];
+
+   $PayState= $_GET['PayState'];
+
+   $PayTimp= $_GET['PayTimp'];
+   $Fee= $_GET['Fee'];
+      $shichang=$_GET['shichang'];
+
+      $action= $_GET['action'];
+if($action=='insert')
+  {
+                  $sql =  "insert into ShoppingCart (CouId,PId,PayState,PayTimp,Fee,shichang) values ($CouId,$PId ,   $PayState, $PayTimp,$Fee, $shichang);";
+    
+                          $result = $conn->query($sql);
+                           while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+                           echo json_encode(['data'=>$res]);
+                                                        $conn->close();
+}
+if($action=='update')
+  {
+    
+       $sql =  "update ShoppingCart  set PayState =1 where PayTimp=$PayTimp;";
+      
+                          $result = $conn->query($sql);
+                           while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+                           echo json_encode(['data'=>$res]);
+                                                        $conn->close();
+}if($action=='delete')
+  {
+        $sql =  "delete from ShoppingCart where PayTimp=$PayTimp;";
+   
+                          $result = $conn->query($sql);
+                           while($row=mysqli_fetch_assoc($result)) $res[] = $row;
+                           echo json_encode(['data'=>$res]);
+                                                        $conn->close();
+}
+
+
+
+
+
+            if($action=='chaxun')
+
+                      {
+
+
+                                  $sql =  "select * from ShoppingCart where PId= $PId  order by PayTimp desc;";
+
+
+
+                                   $result = $conn->query($sql);
+                                   while($row=mysqli_fetch_assoc($result))
+                                   {
+                                             $sql =  "select * from CouInfo where CouId=  $row[CouId];";
+                                              $result1 = $conn->query($sql);
+                                             $row1=mysqli_fetch_assoc($result1);
+
+                                              if(empty($row1["TeaId"]))
+                                              {
+                                                      $sql =  "select * from EduLocation where ELId= $row1[ELId];";
+                                                      $result2 = $conn->query($sql);;
+                                                      $row2=mysqli_fetch_assoc($result2);
+                                                      $row1["owner"]=$row2["ELName"];
+                                              }
+                                               if(empty($row1["ELId"]))
+                                               {
+                                                       $sql =  "select * from TeaInfo where  TeaId= $row1[TeaId];";
+                                                       $result2 = $conn->query($sql);;
+                                                       $row2=mysqli_fetch_assoc($result2);
+                                                       $row1["owner"]=$row2["TeaName"];
+                                               }
+                                               $row1["PayTimp"]=$row["PayTimp"];
+                                               $row1["Fee"]=$row["Fee"];
+                                               $row1['PayState']=$row['PayState'];
+			$row1['shichang']=$row['shichang'];
+                                               $res[] = $row1;
+                                   }
+                                    echo json_encode(['data'=>$res]);
+                                                       $conn->close();
+
+
+                                       }
+
+
+?>
